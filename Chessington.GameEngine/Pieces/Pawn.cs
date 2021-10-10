@@ -13,9 +13,16 @@ namespace Chessington.GameEngine.Pieces
             var square = board.FindPiece(this);
             if (this.Player == Player.White)
             {
-                return new Square[] {Square.At(square.Row - 1, square.Col)};
+                var moves = new List<Square> {Square.At(square.Row - 1, square.Col)};
+                if (!HasMoved) { moves.Add(Square.At(square.Row - 2, square.Col)); }
+                
+                return moves;
             }
-            return new Square[] {Square.At(square.Row + 1, square.Col)};
+            
+            var movess = new List<Square> {Square.At(square.Row + 1, square.Col)};  // Why can't i name this moves?
+            if (!HasMoved) { movess.Add(Square.At(square.Row + 2, square.Col)); }
+                
+            return movess;
         }
     }
 }
